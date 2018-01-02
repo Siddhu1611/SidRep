@@ -1,0 +1,205 @@
+1. Collaboration between Developers and Operations
+2. To improve the Quality and Efficiency
+
+
+
+1. Git = Source code management.  
+2. Jenkins = Monitoring execution of repeated Jobs
+3. Chef = Speed, scale and Consistency. Configuration Management Tool
+4. Ansible = 
+5. Puppet = 
+6. Docker = 
+7. Python = 
+
+
+DevOps Life Cycle Categories:
+
+1. Continuous Development
+2. Continuous Integration
+3. Continuous Testing
+4. Continuous Monitoring
+5. Virtualization and Containerization
+
+
+1. Continuous Development:
+
+This involves coding and building phases and uses tools like Git and SVN for maintaining the Different Versions of code
+Ant, Maven, Gradle for building and packaging the code into an exe file that can be sent to QA for testing
+
+2. Continous Testing:
+
+Automation Testing Tools like Selenium, TestNG, JUnit are used
+Docker Containers are used
+
+3. Continuous Integration:
+
+Jenkins is used for Continuous Integration
+With Jenkins, you can pull the latest code revision from GIT repository and produce a build which can be finally deployed into Production server
+
+4. Continuous Deployment:
+
+Configuration Tools like Puppet, Chef, SaltStack and Ansible 
+Containerization plays an important role here
+Docker and Vagrant are the Containerization Tools
+
+5. Continuous Monitoring:
+
+Splunk, ELK Stack, Nagios, NewRelic and Sensu
+
+__________________________________________________________________________________________________________________________________________
+
+Git is a free, open source distributed version control system designed to handle any type of projects.
+It was created by Linus Torvalds in 2005 to develop Linux Kernel
+
+Git is a distributed Version Control system tool that supports Distributed Non-linear workflows by providing Data Assurance for developing Quality Software
+
+CVCS:
+1. It uses a Central Server to store all the files and enable Team collobartion
+2. In case of the Central Server goes down you cannot work in it and if not a proper backup is taken you will lose the History of the Information
+
+Client Server Model Version Control:
+1. Centralized Model
+2. Single Repository
+3. You need to have be in the Network in order to access the files from Central Server
+4. If the Central Server gets corrupted then the entire data gets lost
+
+Distributed Version Control System Tool: (DVCS)
+1. Don't depend on the Central Server
+2. Allows to clone the main repository on their own Hard drive.  Each user can maintain the copy of the central repository
+3. Through PULL command, the users they can update their local repository with the new data from the Central server
+4. Through PUSH command, you can push the code back to the repository once you are done the changes.
+
+Linus Torvalds has developed the GIT
+
+Advantages of GIT/DVCS:
+1. All operations will be very fast except PUSH and PULL as the GIT tool needs to access only the local hard drive and NOT the Central repository server.  Hence you do not need an internet connection
+2. GIT is an Open Source
+3. The core part of GIT is written in C 
+4. Eventhough GIT mirrors the entire Central repository the size of the data on the Client side is small.  
+5. In the event of Crash, GIT can take the data from the Backup which mirrors the Central repository
+6. SHA1 - Git uses a Cryptographic Hash Function called Secure Hash Function to name and identify the Objects within the Database. 
+
+
+DVCS Terminologies:
+Local Repository = Private Workplace as a working copy.  
+Working Directory = It is the place where the files are checked out
+Staging Area  = Only the files present in the Staging Area will get committed as per GIT
+
+
+Workflow of GIT:
+1. The Developer will modify or make changes to the files in the Working Directory.  The Working Directory is the place where the files are checked out.
+2. The Developer will add those files to the Staging Area.
+3. GIT ADD OPERATION = The movement of files from Working Directory to Staging Area
+4. The Developer will perform Commit operation that will move the files from Staging Area to GIT Repository which is called PUSH operation.
+5. GIT COMMIT OPERATION = The movement of files from Staging Area to GIT Repository
+
+
+Blobs:
+BINARY LARGE OBJECT.  It is a Binary file. It holds the file data but doesn't contain any metadata information. It is SHA1 Hash of that file.
+
+Trees:
+It is an object which represents the Directory.  
+It holds blobs and other sub-directories.
+It is a Binary file that stores the references to BLOBS
+
+Commit:
+It's like individual change to a file.  When you save a file, it creates a Unique ID or HASH or SHA which allows you to keep record of what changes were made by who and when.
+
+Life Cycle of GIT:
+1. Clone the GIT Repository as a working copy
+2. Modify the working copy by adding/deleting files.
+3. Review the changes before commit.
+4. Commit changes.  Then Push the changes to Repository
+5. After commit if you want to make changes, you can correct the Last commit and Push the changes to the Repository.
+
+
+GIT workflows:
+Blessed Repository is the Main repository
+Integration Manager checks in and checks out the code from Blesssed Repository
+Integration Manager acts as a Gate which gives the code to our local machines  and in turn the code is checked into the Blessed Repository
+
+Linux Style Workflows:
+In between Integration Manager and Blessed repository there are interfaces which acts as
+a Dictator and lieutenant.
+
+GIT Repository Strucutre:
+There are 3 partitions:
+
+1. Working Directory = This is where you do the changes in the code. Once you are done the code changes you can add to the next partition that is the Staging Area.
+With git add command you add to the Staging Area.
+THIS HOLDS THE ACTUAL FILES.
+2. Staging Area = This is the place where your code review is done here and you can ask others to review your code and give comments.
+THIS IS THE INDEX
+3. Repository = Once the code review is done and the changes are completed, through git commit command the code is loaded into Repository which is the Local repository and NOT the main server.
+THIS IS THE HEADER WHICH POINTS TO THE LAST COMMIT THAT HAS BEEN MADE.
+
+Once everything is fine, the code is PUSHED from the Local Repository to the MAIN repository
+
+Why we need Staging Area?
+Say if you are working in a file, wherein you want to change a part for Customer 1 and NOT for Customer 2.  Customer 2 don't want the change to get updated.
+Here, you do the change for Customer 1, then do the code review and add to the Staging Area.  Then you can start working for Customer 2 and load to Staging Area.
+Hence, Staging Area helps in Isolating the code
+
+
+With GIT ADD command you can push the code from WORKING DIRECTORY to STAGING AREA
+With GIT COMMIT command you can push the code from STAGING AREA to LOCAL REPOSITORY
+
+GITHUB - Web based GIT repository hosting service with more 28 million repositories.  Features include Code Comparison, Code Sync and Git Shell.
+
+
+Bare Repository:
+It doesn't contain the working or checked out copy of the Source files.
+Contains only the Version control information in the Root folder  and it doesn't contain the Special .git sub-directory.
+Command = git init -bare 
+mainly used for Sharing and Collaborating with other Developers
+We can create a bare repository in which all Developers can push their code.
+There is no working Tree in it as no one directly Edits the file in the Bare repository
+
+
+
+
+GIT Commands:
+
+**** git add file_name.c  # This is the first commit.
+
+**** git commit -m "Add Sort Operation.txt "  # Add files to the Staging Area
+In the above command, -m indicates that the following text should be read as a message.  
+
+git init - >Turns a directory into an empty GIT repository.  After running init, adding and commiting files is possible. This will initiliaze the local directory as GIT Repository.
+It will Reinitilize the existing GIT Repository.
+
+git add -> To add the files to the Staging Area.  
+
+git config --global user.name "Siddhu1611"
+git config --global user.email siddharthan.segar@gmail.com
+
+git clone https://github.com/Siddhu1611/TestGIT.git = When you create a Repository in GITHub it creates as a Remote Repository.  You can clone your repository to create a local copy on your computer and you can sync btween the locations.
+
+git add Excel.txt
+git commit -m "This is my First Commit" Excel.txt
+git push -u origin master = Pushes the changes in your local repository up to the remote repository you specified as the origin
+
+git remote -v = Verifies the new remote URL
+
+git remote add origin https://github.com/user/repo.git = origin is the remote name and the URL is the remote URL.
+
+git --bare init = This will initilize the empty Git repository in the folder mentioned.  
+
+ssh-keygen = This command will generate two Keys. one is private and another is public.  The Private Key is "id_rsa"and Public Key is "id_rsa.pub"
+
+BRANCH:
+It allows each developer to branch out from the original code base and isolate their work from others.
+When you make the First commit in the Repository, GIT will automatically create a Master Branch by default.
+
+
+__________________________________________________________________________________________________________________________________________
+
+http://www.vogella.com/tutorials/Git/article.html
+
+Localised and Centralized Version Control System:
+
+Distributed Version Control Systems:
+
+
+
+
